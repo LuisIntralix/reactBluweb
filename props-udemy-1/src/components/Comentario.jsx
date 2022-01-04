@@ -1,13 +1,13 @@
 import React from 'react'
 import Imagen from './Imagen'
 
-const Comentario = (props) => {
+const Comentario = ({url, persona, descripcion}) => {
     return (
         <div className='media'>
-            <Imagen url={props.url} />
+            <Imagen url={url} />
             <div className="media-body">
-                <h5 className="mt-0">{props.persona}</h5>
-                {props.descripcion}
+                <h5 className="mt-0">{persona}</h5>
+                {descripcion}
             </div>
         </div>
     )
