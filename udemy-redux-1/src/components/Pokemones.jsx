@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { obtenerPokemonesAccion } from '../redux/pokeDucks'
+import { obtenerPokemonesAccion, obtenerPokemonesEspecificoAccion } from '../redux/pokeDucks'
 
 
 const Pokemones = () => {
@@ -8,12 +8,21 @@ const Pokemones = () => {
     const dispatch = useDispatch()
 
     const pokemones = useSelector(store => store.pokemones.array)
-    console.log(pokemones)
+
+        /*Se ejecuta después de pintar todo el componente*/
+        useEffect(() => {
+            //console.log('UseEffect')
+            dispatch(obtenerPokemonesAccion())
+
+        }, [])
+
+
 
     return (
         <div>
             Lista de pokemones
-            <button onClick={() => dispatch(obtenerPokemonesAccion())}>Obtener pockemones</button>
+            <hr />
+            <button onClick={() => dispatch(obtenerPokemonesAccion())} >Cargar pokemones</button>
             <ul>
                 {
                     pokemones.map(item => (

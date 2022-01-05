@@ -2,12 +2,12 @@ import axios from 'axios'
 
 // constantes
 const dataInicial = {
-    array: []
+    array: [],
+    offset: 0
 }
 
 //Tipos (Casos)
 const OBTENER_POKEMONES_EXITO = 'OBTENER_POKEMONES_EXITO'
-
 
 // reducers
 export default function pokeReducer(state = dataInicial, action) {
@@ -16,8 +16,9 @@ export default function pokeReducer(state = dataInicial, action) {
         case OBTENER_POKEMONES_EXITO:
             return { ...state, array: action.payload }
 
-            default:
-                return state
+
+        default:
+            return state
     }
 
 }
@@ -26,14 +27,14 @@ export default function pokeReducer(state = dataInicial, action) {
 //acciones
 export const obtenerPokemonesAccion = () => async (dispatch, getState) => {
     try {
-
-        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
+        const {offset} = getState().pokemones
+        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?offset='+offset+'&limit=20')
         dispatch({
             type: OBTENER_POKEMONES_EXITO,
             payload: res.data.results
         })
 
-        
+
     } catch (error) {
         console.log(error)
     }
@@ -41,5 +42,21 @@ export const obtenerPokemonesAccion = () => async (dispatch, getState) => {
 }
 
 
+//Prueba de acciones
+export const obtenerPokemonesEspecificoAccion = (param) => async (dispatch, getState) => {
+    try {
+
+        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=' + param + '&limit=20')
+        dispatch({
+            type: OBTENER_POKEMONES_EXITO,
+            payload: res.data.results
+        })
+
+
+    } catch (error) {
+        console.log(error)
+    }
+
+}
 
 
