@@ -18,6 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MyContent from './MyContent';
+import logotipo from '../img/logotipo.png';
 
 const drawerWidth = 240;
 
@@ -122,6 +123,7 @@ export default function Menu() {
             </AppBar>
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
+                    LMBL México
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>

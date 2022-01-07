@@ -1,35 +1,61 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { obtenerPokemonesAccion, obtenerPokemonesEspecificoAccion } from '../redux/pokeDucks'
+import { obtenerPokemonesAccion, siguientePokemonAccion, anteriorPokemonAccion } from '../redux/pokeDucks'
 
 
 const Pokemones = () => {
 
     const dispatch = useDispatch()
 
-    const pokemones = useSelector(store => store.pokemones.array)
-
-        /*Se ejecuta después de pintar todo el componente*/
-        useEffect(() => {
-            //console.log('UseEffect')
-            dispatch(obtenerPokemonesAccion())
-
-        }, [])
-
+    const pokemones = useSelector(store => store.pokemones.results)
+    const next = useSelector(store => store.pokemones.next)
+    const previous = useSelector(store => store.pokemones.previous)
 
 
     return (
-        <div>
-            Lista de pokemones
-            <hr />
-            <button onClick={() => dispatch(obtenerPokemonesAccion())} >Cargar pokemones</button>
-            <ul>
-                {
-                    pokemones.map(item => (
-                        <li key={item.name}>{item.name}</li>
-                    ))
-                }
-            </ul>
+        <div className='row'>
+
+            <div className="col-md-6">
+
+                <h3>Lista de pokemones</h3>
+
+                <br />
+
+                <div className='d-flex justify-content-around '>
+
+                    {
+                        pokemones.length === 0 && <button className='btn btn-dark' onClick={() => dispatch(obtenerPokemonesAccion())} >Cargar pokemones</button>
+
+                    }
+
+                    {
+                        next && <button className='btn btn-dark' onClick={() => dispatch(siguientePokemonAccion())} >Siguiente pokemones</button>
+
+                    }
+
+                    {
+                        previous && <button className='btn btn-dark' onClick={() => dispatch(anteriorPokemonAccion())} >Anterior pokemones</button>
+
+                    }
+
+                </div>
+
+                <ul className='list-group mt-3'>
+                    {
+                        pokemones.map(item => (
+                            <li key={item.name} className='list-group-item'>{item.name}
+                            <button className="btn btn-dark btn-sm float-right">
+                                Info
+                            </button>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+
+            <div className="col-md-6">
+                <h3>Detalle de un pokemon</h3>
+            </div>
 
         </div>
     )

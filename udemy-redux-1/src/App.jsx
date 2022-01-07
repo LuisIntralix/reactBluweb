@@ -11,7 +11,9 @@ const store = generateStore()
   return (
     <div>
       <Provider store={store}>
+        <div className='container mt-3'>
         <Pokemones></Pokemones>
+        </div>
       </Provider>
 
     </div>
