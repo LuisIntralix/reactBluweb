@@ -9,9 +9,4 @@ const Prueba = ({id,name}) => {
     );
 };
 
-Prueba.propTypes = {
-    id : 'Id de la propiedad',
-    name : 'Nombre de la propiedad'
-};
-
 export default Prueba;

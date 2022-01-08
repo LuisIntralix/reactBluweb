@@ -11,7 +11,7 @@ const dataInicial = {
 //Tipos (Casos)
 const OBTENER_POKEMONES_EXITO = 'OBTENER_POKEMONES_EXITO'
 const SIGUIENTE_POKEMONES_EXITO = 'SIGUIENTE_POKEMONES_EXITO'
-
+const POKE_INFO_EXITO = 'POKE_INFO_EXITO'
 // reducers
 export default function pokeReducer(state = dataInicial, action) {
 
@@ -24,7 +24,11 @@ export default function pokeReducer(state = dataInicial, action) {
                 ...state,
                 ...action.payload
             }
-
+        case POKE_INFO_EXITO:
+            return {
+                ...state,
+                unPokemon: action.payload
+            }
         default:
             return state
     }
@@ -33,6 +37,45 @@ export default function pokeReducer(state = dataInicial, action) {
 
 
 //acciones
+
+export const unPokeDetalleAccion = (url = 'https://pokeapi.co/api/v2/pokemon/1/') => async (dispatch) => {
+
+    if(localStorage.getItem(url)){
+
+        dispatch({
+            type: POKE_INFO_EXITO,
+            payload: JSON.parse(localStorage.getItem(url))
+        })
+        console.log('Desde localstorage')
+        return
+    }
+
+    try {
+        const res = await axios.get(url)
+        dispatch({
+            type: POKE_INFO_EXITO,
+            payload: {
+                nombre: res.data.name,
+                ancho: res.data.weight,
+                alto: res.data.height,
+                foto: res.data.sprites.front_default,
+            }
+        })
+        localStorage.setItem(url,JSON.stringify(
+            {
+                nombre: res.data.name,
+                ancho: res.data.weight,
+                alto: res.data.height,
+                foto: res.data.sprites.front_default,
+            }
+        ))
+        console.log('Desde API')
+    } catch (error) {
+
+    }
+}
+
+
 export const obtenerPokemonesAccion = () => async (dispatch, getState) => {
 
     if (localStorage.getItem('offset=0')) {
@@ -48,7 +91,7 @@ export const obtenerPokemonesAccion = () => async (dispatch, getState) => {
     try {
         console.log('Datos desde api')
         //const offset = getState().pokemones.offset
-        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
+        const res = await axios.get('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10')
         console.log(res.data);
         dispatch({
             type: OBTENER_POKEMONES_EXITO,

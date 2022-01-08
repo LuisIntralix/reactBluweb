@@ -103,7 +103,7 @@ export default function Menu() {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
-                <Toolbar>
+                <Toolbar sx={{ bgcolor: 'primary.main' }}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -117,7 +117,7 @@ export default function Menu() {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Mini variant drawer
+                        Reportes Gerenciales
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -154,7 +154,7 @@ export default function Menu() {
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
 
-                     <MyContent/>
+                <MyContent />
 
             </Box>
         </Box>
