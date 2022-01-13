@@ -1,28 +1,33 @@
 
-import './App.css'
-import {Button} from '@mui/material'
-import { styled } from '@mui/material/styles';
+import Global from './components/Global'
+import Botones from './components/Botones'
+import Estilos from './components/Estilos'
+import Iconos from './components/Iconos'
+import Tipografia from './components/Tipografia'
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './temaConfig'
+import Navbar from './components/Navbar'
+
+
 function App() {
 
   return (
     <div className="App">
-      <Button color="primary">
-        Primary
-      </Button>
-      <p>Lorem</p>
-      <Button color="primary" variant='contained'>
-        Color
-      </Button>
-      <p>Lorem</p>
-      <Button color="primary" variant='contained' disableElevation
-       href='https://www.google.com/'>
-        disable Elevation
-      </Button>
-      <p>Lorem</p>
-      <Button color="primary" variant='contained' 
-       fullWidth>
-        fullWIdth
-      </Button>
+
+      <ThemeProvider theme={theme}>
+        <Navbar/>
+        {/*<Botones />
+      <hr />
+      <Iconos />
+      <hr />
+      <Tipografia></Tipografia>
+      <hr />
+      <Estilos/>*/}
+
+        <Global />
+
+      </ThemeProvider>
+
     </div>
   )
 }
