@@ -1,7 +1,10 @@
+import Layout from "../components/Layout"
+
 export default function about() {
     return (
-        <div>
-            Acerca de
-        </div>
+        <Layout
+        title={'Acerca de '}>
+            Luis Eduardo
+        </Layout>
     )
 }

@@ -8,10 +8,7 @@ export default function primerPost() {
     return (
         <div>
 
-            <Head>
-                <Title> Este es mi primer post SEO </Title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
+
 
             <hr />
             <h4>Mi primer post</h4>
