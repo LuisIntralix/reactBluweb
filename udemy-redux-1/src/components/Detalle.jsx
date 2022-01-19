@@ -8,7 +8,6 @@ const Detalle = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-
         const fetchData = () => {
             dispatch(unPokeDetalleAccion())
         }
